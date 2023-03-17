@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FileOutputStream out = null;
         BufferedWriter writer = null;
         try {
-            out = openFileOutput("data", Context.MODE_PRIVATE);
+            out = openFileOutput("data", Context.MODE_PRIVATE); //FileOutputStream
             writer = new BufferedWriter(new OutputStreamWriter(out));
             writer.write(inputText);
         } catch (IOException e){
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader reader = null;
         StringBuilder content = new StringBuilder();
         try {
-            in = openFileInput("data");
+            in = openFileInput("data");                        //FileInputStream
             reader = new BufferedReader(new InputStreamReader(in));
             String line = "";
             while ((line = reader.readLine()) != null){
