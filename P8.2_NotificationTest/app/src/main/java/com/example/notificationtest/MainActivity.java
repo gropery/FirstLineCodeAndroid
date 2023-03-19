@@ -9,10 +9,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -48,7 +52,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                         .setContentIntent(pi)
-//                        .setAutoCancel(true)
+                        .setAutoCancel(true)
+                        .setSound(Uri.fromFile(new File("/system/media/audio/ringtones/luna.ogg")))
+                        .setVibrate(new long[] {0, 1000, 1000, 1000})
+                        .setLights(Color.GREEN, 1000, 1000)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(("Learn how to build" +
+                                "notification, send and sync data, and use voice actions. Get the official" +
+                                "Android IDE and developer tools to build apps for Android.")))
+                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(
+                                BitmapFactory.decodeResource(getResources(), R.drawable.big_image)))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .build();
                 manager.notify(1, notification);
                 break;
