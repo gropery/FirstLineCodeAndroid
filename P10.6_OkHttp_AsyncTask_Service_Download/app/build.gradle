@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.sendhttprequest'
+    namespace 'com.example.okhttp_asynctask_service_download'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.sendhttprequest"
+        applicationId "com.example.okhttp_asynctask_service_download"
         minSdk 28
         targetSdk 33
         versionCode 1
