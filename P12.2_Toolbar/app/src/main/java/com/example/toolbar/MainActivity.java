@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private Fruit[] fruits = {new Fruit("Apple",R.drawable.apple),new Fruit("Banana",R.drawable.banana),
             new Fruit("Orange",R.drawable.orange),new Fruit("Watermelon",R.drawable.watermelon),
@@ -86,6 +88,37 @@ public class MainActivity extends AppCompatActivity {
         adapter = new FruitAdapter(fruitList);
         recyclerView.setAdapter(adapter);
 
+        // 下拉刷新
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeColors(com.google.android.material.R.color.design_default_color_primary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshFruits();
+            }
+        });
+
+    }
+
+    private void refreshFruits() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initFruits();
+                        adapter.notifyDataSetChanged();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
     }
 
     private void initFruits() {
