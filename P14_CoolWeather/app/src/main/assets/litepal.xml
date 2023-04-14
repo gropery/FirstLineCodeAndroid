@@ -4,7 +4,7 @@
     <dbname value="cool_weather" />
 
     <!--  版本号  -->
-    <version value="1" />
+    <version value="2" />
 
     <list>
         <!--   数据库表路径     -->
